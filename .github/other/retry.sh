@@ -15,7 +15,7 @@ for ((attempt=0; attempt<limit; attempt++)); do
     if "$@"; then
         # Command succeeded, exit the loop
         echo "Done."
-        break
+        exit 0
     fi
 
     # Calculate the sleep duration using the retry interval from the array
@@ -26,3 +26,6 @@ for ((attempt=0; attempt<limit; attempt++)); do
     echo "Retry #$attempt in $sleepDuration seconds..."
     sleep "$sleepDuration"
 done
+
+# Exit with an error code – command invoked cannot execute.
+exit 126
