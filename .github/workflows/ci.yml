@@ -114,7 +114,7 @@ jobs:
 
           - name: linux
             os: ubuntu-22.04
-            rust-toolchain: "1.87"
+            rust-toolchain: "1.90"
             rust-special: -msrv
 
     steps:
@@ -154,12 +154,6 @@ jobs:
           # macOS builds fail semi-randomly with an `libc++abi: Pure virtual function called!` error.
           # For now on run them with retry; resort to compiling only if it won't be enough (i.e. first time when it will fail three times in the row).
           # See: https://github.com/godot-rust/demo-projects/issues/12
-          - name: macos-x86
-            os: macos-13
-            artifact-name: macos-x86-nightly
-            godot-binary: godot.macos.editor.dev.x86_64
-            retry: true
-
           - name: macos-arm
             os: macos-latest
             artifact-name: macos-arm-nightly
@@ -180,9 +174,9 @@ jobs:
             artifact-name: linux-nightly
             godot-binary: godot.linuxbsd.editor.dev.x86_64
 
-          - name: linux-4.4
+          - name: linux-4.5
             os: ubuntu-22.04
-            artifact-name: linux-4.4
+            artifact-name: linux-4.5
             godot-binary: godot.linuxbsd.editor.dev.x86_64
 
           # Deliberately don't include:

@@ -47,7 +47,7 @@ impl ICharacterBody3D for Player {
             direction += Vector3::FORWARD;
         }
 
-        if direction != Vector3::ZERO {
+        if !direction.is_zero_approx() {
             // In the lines below, we turn the character when moving and make the animation play faster.
             direction = direction.normalized();
 
