@@ -5,7 +5,6 @@ use crate::scorelabel::UserInterface;
 
 use godot::classes::{ColorRect, InputEvent, PathFollow3D, Timer};
 use godot::prelude::*;
-use rand::Rng;
 
 #[derive(GodotClass)]
 #[class(init, base=Node)]
@@ -59,7 +58,7 @@ impl MainScene {
 
         // Choose a random location on the SpawnPath.
         // Set random progress using proper rng.
-        mob_spawn_location.set_progress_ratio(rand::rng().random_range(0.0..=1.0));
+        mob_spawn_location.set_progress_ratio(rand::random_range(0.0..=1.0));
 
         // Communicate the spawn location and the player's location to the mob.
         let player_position = self
