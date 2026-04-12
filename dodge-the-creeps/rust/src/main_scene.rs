@@ -3,7 +3,6 @@ use crate::{hud, mob, player};
 use godot::classes::{AudioStreamPlayer, Marker2D, PathFollow2D, RigidBody2D, Timer};
 use godot::prelude::*;
 
-use rand::Rng as _;
 use std::f32::consts::PI;
 
 // Deriving GodotClass makes the class available to Godot.
@@ -126,14 +125,13 @@ impl Main {
 
         let mut mob_scene = self.mob_scene.instantiate_as::<RigidBody2D>();
 
-        let mut rng = rand::thread_rng();
-        let progress = rng.gen_range(u32::MIN..u32::MAX);
+        let progress = rand::random_range(u32::MIN..u32::MAX);
 
         mob_spawn_location.set_progress(progress as f32);
         mob_scene.set_position(mob_spawn_location.get_position());
 
         let mut direction = mob_spawn_location.get_rotation() + PI / 2.0;
-        direction += rng.gen_range(-PI / 4.0..PI / 4.0);
+        direction += rand::random_range(-PI / 4.0..PI / 4.0);
 
         mob_scene.set_rotation(direction);
 
@@ -143,7 +141,7 @@ impl Main {
         let range = {
             // Local scope to bind `mob` user object
             let mob = mob.bind();
-            rng.gen_range(mob.min_speed..mob.max_speed)
+            rand::random_range(mob.min_speed..mob.max_speed)
         };
 
         mob.set_linear_velocity(Vector2::new(range, 0.0).rotated(real::from_f32(direction)));

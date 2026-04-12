@@ -1,6 +1,5 @@
 use godot::classes::{AnimationPlayer, CharacterBody3D, ICharacterBody3D};
 use godot::prelude::*;
-use rand::Rng;
 use std::f32::consts::PI;
 
 #[derive(GodotClass)]
@@ -29,9 +28,9 @@ impl Mob {
             .look_at_from_position(start_position, player_position);
 
         self.base_mut()
-            .rotate_y(rand::rng().random_range(-PI / 4.0..PI / 4.0));
+            .rotate_y(rand::random_range(-PI / 4.0..PI / 4.0));
 
-        let random_speed = rand::rng().random_range(self.min_speed..self.max_speed);
+        let random_speed = rand::random_range(self.min_speed..self.max_speed);
 
         // We calculate a forward velocity first, which represents the speed.
         self.base_mut()
@@ -44,7 +43,7 @@ impl Mob {
         self.base_mut()
             .set_velocity(velocity.rotated(Vector3::UP, rotation.y));
 
-        let animation_speed = rand::rng().random_range(1.0..6.0);
+        let animation_speed = rand::random_range(1.0..6.0);
 
         self.base()
             .get_node_as::<AnimationPlayer>("AnimationPlayer")
